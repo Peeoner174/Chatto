@@ -80,3 +80,4 @@ class TimeSeparatorPresenter: ChatItemPresenterProtocol {
         return 24
     }
 }
+    

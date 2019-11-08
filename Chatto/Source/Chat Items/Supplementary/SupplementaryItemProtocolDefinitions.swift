@@ -38,13 +38,24 @@ public protocol SupplementaryItemPresenterProtocol: class {
     var canCalculateHeightInBackground: Bool { get } // Default is false
     func heightForSupplementaryItem(maximumWidth width: CGFloat, decorationAttributes: ChatItemDecorationAttributesProtocol?) -> CGFloat
     func dequeueSupplementaryItem(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView
-    func configureSupplementaryItem(_ cell: UICollectionReusableView, decorationAttributes: ChatItemDecorationAttributesProtocol?)
-    func supplementaryItemWillBeShown(_ cell: UICollectionReusableView) // optional
-    func supplementaryItemWasHidden(_ cell: UICollectionReusableView) // optional
+    func configureSupplementaryItem(_ reusableView: UICollectionReusableView, decorationAttributes: ChatItemDecorationAttributesProtocol?)
+    func supplementaryItemWillBeShown(_ reusableView: UICollectionReusableView) // optional
+    func supplementaryItemWasHidden(_ reusableView: UICollectionReusableView) // optional
 }
 
-public protocol SectionItemPresenterBuilderProtocol {
-    func canHandleChatItem(_ chatItem: ChatItemProtocol) -> Bool
-    func createPresenterWithChatItem(_ chatItem: ChatItemProtocol) -> SectionItemPresenterProtocol
-    var presenterType: SectionItemPresenterProtocol.Type { get }
+
+public extension SupplementaryItemPresenterProtocol {
+    var canCalculateHeightInBackground: Bool { return false }
+    func supplementaryItemWillBeShown(_ reusableView: UICollectionReusableView) {}
+    func supplementaryItemWasHidden(_ reusableView: UICollectionReusableView) {}
 }
+
+public protocol SupplementaryItemPresenterBuilderProtocol {
+    func canHandleChatItem(_ chatItem: ChatItemProtocol) -> Bool
+    func createPresenterWithChatItem(_ chatItem: ChatItemProtocol) -> SupplementaryItemPresenterProtocol
+    var presenterType: SupplementaryItemPresenterProtocol.Type { get }
+}
+
+
+
+

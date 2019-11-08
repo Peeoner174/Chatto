@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3565429D203DB99300B29DA1 /* ChatLayoutConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565429C203DB99300B29DA1 /* ChatLayoutConfiguration.swift */; };
+		5C7D2C44237595EC0014D40E /* BaseSupplementaryItemPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D2C43237595EC0014D40E /* BaseSupplementaryItemPresentor.swift */; };
 		6E5BF8FE23756A8C00E43614 /* SupplementaryItemProtocolDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5BF8FD23756A8C00E43614 /* SupplementaryItemProtocolDefinitions.swift */; };
 		B3B1B0FF1D6B40DF00D1183D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1B0FE1D6B40DF00D1183D /* Utils.swift */; };
 		C31E919A1BFF4CA300339585 /* BaseChatViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E91991BFF4CA300339585 /* BaseChatViewControllerTests.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		3565429C203DB99300B29DA1 /* ChatLayoutConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLayoutConfiguration.swift; sourceTree = "<group>"; };
 		55E85D821BE390BE001885AD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C7D2C43237595EC0014D40E /* BaseSupplementaryItemPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSupplementaryItemPresentor.swift; sourceTree = "<group>"; };
 		6E5BF8FD23756A8C00E43614 /* SupplementaryItemProtocolDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementaryItemProtocolDefinitions.swift; sourceTree = "<group>"; };
 		B3B1B0FE1D6B40DF00D1183D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C31E91991BFF4CA300339585 /* BaseChatViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChatViewControllerTests.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				6E5BF8FD23756A8C00E43614 /* SupplementaryItemProtocolDefinitions.swift */,
+				5C7D2C43237595EC0014D40E /* BaseSupplementaryItemPresentor.swift */,
 			);
 			path = Supplementary;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				C3C7C3991CAC4BAC00A49929 /* ChatDataSourceProtocol.swift in Sources */,
 				C321DDA91BE9649F00DE88CC /* BaseChatItemPresenter.swift in Sources */,
 				C36281ED1BF10086004D6BCE /* SerialTaskQueue.swift in Sources */,
+				5C7D2C44237595EC0014D40E /* BaseSupplementaryItemPresentor.swift in Sources */,
 				C321DDAE1BE9649F00DE88CC /* ChatItemProtocolDefinitions.swift in Sources */,
 				C36281E51BF0F0F0004D6BCE /* BaseChatViewController+Changes.swift in Sources */,
 				C38352D11CC6514B006C359C /* BaseChatViewController+AccessoryViewRevealer.swift in Sources */,

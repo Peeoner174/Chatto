@@ -21,6 +21,9 @@
 		55A77B4A1FCC5EE70040C77E /* MessagesSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A77B491FCC5EE70040C77E /* MessagesSelectorProtocol.swift */; };
 		55A77B4C1FCC5FFB0040C77E /* BaseMessagesSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A77B4B1FCC5FFB0040C77E /* BaseMessagesSelector.swift */; };
 		55EE230821BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE230721BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift */; };
+		5C7D2C482375A0960014D40E /* TimeSeparatorReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D2C472375A0960014D40E /* TimeSeparatorReusableView.swift */; };
+		5C7D2C4A2375A2D10014D40E /* DateSeparatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D2C492375A2D10014D40E /* DateSeparatorModel.swift */; };
+		5C7D2C4C2375A3B40014D40E /* DateSeparatorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D2C4B2375A3B40014D40E /* DateSeparatorPresenter.swift */; };
 		C33FBFB01BDE441C008E3545 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C33FBFAF1BDE441C008E3545 /* Assets.xcassets */; };
 		C33FBFB31BDE441C008E3545 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33FBFB11BDE441C008E3545 /* LaunchScreen.storyboard */; };
 		C341D42E1C9635DF00FD3463 /* TimeSeparatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C341D42B1C9635DF00FD3463 /* TimeSeparatorModel.swift */; };
@@ -90,6 +93,9 @@
 		55A77B491FCC5EE70040C77E /* MessagesSelectorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesSelectorProtocol.swift; sourceTree = "<group>"; };
 		55A77B4B1FCC5FFB0040C77E /* BaseMessagesSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMessagesSelector.swift; sourceTree = "<group>"; };
 		55EE230721BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToBottomButtonChatViewController.swift; sourceTree = "<group>"; };
+		5C7D2C472375A0960014D40E /* TimeSeparatorReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSeparatorReusableView.swift; sourceTree = "<group>"; };
+		5C7D2C492375A2D10014D40E /* DateSeparatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSeparatorModel.swift; sourceTree = "<group>"; };
+		5C7D2C4B2375A3B40014D40E /* DateSeparatorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSeparatorPresenter.swift; sourceTree = "<group>"; };
 		623390018DA74FF277EE2626 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DABD92E2BA40464C1727DA2 /* Pods-ChattoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChattoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChattoApp/Pods-ChattoApp.release.xcconfig"; sourceTree = "<group>"; };
 		C33FBFA51BDE441C008E3545 /* ChattoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChattoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,9 +104,9 @@
 		C33FBFB41BDE441C008E3545 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C33FBFB91BDE441C008E3545 /* ChattoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChattoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33FBFBF1BDE441C008E3545 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C341D42B1C9635DF00FD3463 /* TimeSeparatorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeSeparatorModel.swift; path = "Time Separator/TimeSeparatorModel.swift"; sourceTree = "<group>"; };
-		C341D42C1C9635DF00FD3463 /* TimeSeparatorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeSeparatorPresenter.swift; path = "Time Separator/TimeSeparatorPresenter.swift"; sourceTree = "<group>"; };
-		C341D42D1C9635DF00FD3463 /* TimeSeparatorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeSeparatorCollectionViewCell.swift; path = "Time Separator/TimeSeparatorCollectionViewCell.swift"; sourceTree = "<group>"; };
+		C341D42B1C9635DF00FD3463 /* TimeSeparatorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSeparatorModel.swift; sourceTree = "<group>"; };
+		C341D42C1C9635DF00FD3463 /* TimeSeparatorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSeparatorPresenter.swift; sourceTree = "<group>"; };
+		C341D42D1C9635DF00FD3463 /* TimeSeparatorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSeparatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		C35A6F4E1BF807EC0085CA19 /* SlidingDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingDataSourceTests.swift; sourceTree = "<group>"; };
 		C3F91DA01C75EF9E00D461D2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3F91DA11C75EF9E00D461D2 /* DemoChatItemsDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoChatItemsDecorator.swift; sourceTree = "<group>"; };
@@ -205,6 +211,26 @@
 			path = "Chat View Controllers";
 			sourceTree = "<group>";
 		};
+		5C7D2C452375A0550014D40E /* Time Separator Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C341D42D1C9635DF00FD3463 /* TimeSeparatorCollectionViewCell.swift */,
+				C341D42C1C9635DF00FD3463 /* TimeSeparatorPresenter.swift */,
+				C341D42B1C9635DF00FD3463 /* TimeSeparatorModel.swift */,
+			);
+			path = "Time Separator Cell";
+			sourceTree = "<group>";
+		};
+		5C7D2C462375A0690014D40E /* Time Separator Supplementary */ = {
+			isa = PBXGroup;
+			children = (
+				5C7D2C472375A0960014D40E /* TimeSeparatorReusableView.swift */,
+				5C7D2C492375A2D10014D40E /* DateSeparatorModel.swift */,
+				5C7D2C4B2375A3B40014D40E /* DateSeparatorPresenter.swift */,
+			);
+			path = "Time Separator Supplementary";
+			sourceTree = "<group>";
+		};
 		B616EDF620454A787C7E7D84 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,9 +283,8 @@
 		C341D42A1C96359000FD3463 /* Time Separator */ = {
 			isa = PBXGroup;
 			children = (
-				C341D42B1C9635DF00FD3463 /* TimeSeparatorModel.swift */,
-				C341D42C1C9635DF00FD3463 /* TimeSeparatorPresenter.swift */,
-				C341D42D1C9635DF00FD3463 /* TimeSeparatorCollectionViewCell.swift */,
+				5C7D2C462375A0690014D40E /* Time Separator Supplementary */,
+				5C7D2C452375A0550014D40E /* Time Separator Cell */,
 			);
 			name = "Time Separator";
 			path = ..;
@@ -387,6 +412,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -505,13 +531,16 @@
 				55EE230821BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift in Sources */,
 				5587302E1FCD7EE5005BC2EC /* MessagesSelectionChatViewController.swift in Sources */,
 				268CD578220336EB00DEE2C2 /* DemoTextMessageContentFactory.swift in Sources */,
+				5C7D2C4C2375A3B40014D40E /* DateSeparatorPresenter.swift in Sources */,
 				C3F91DCC1C75EFE300D461D2 /* SendingStatusCollectionViewCell.swift in Sources */,
 				C3F91DB71C75EF9E00D461D2 /* DemoChatItemsDecorator.swift in Sources */,
 				EAE6345722EB0CAD0053E21A /* TestItemsReloadingViewController.swift in Sources */,
 				0997CD2F2042E42100D7BDF9 /* CellsViewController.swift in Sources */,
+				5C7D2C482375A0960014D40E /* TimeSeparatorReusableView.swift in Sources */,
 				0997CD312042E58400D7BDF9 /* ChatWithTabBarExamplesViewController.swift in Sources */,
 				558730341FCD8891005BC2EC /* AddRandomMessageChatViewController.swift in Sources */,
 				DECD501A21AEEAF100988729 /* ContentAwareInputItem.swift in Sources */,
+				5C7D2C4A2375A2D10014D40E /* DateSeparatorModel.swift in Sources */,
 				C3F91DC11C75EF9E00D461D2 /* DemoPhotoMessageModel.swift in Sources */,
 				C3F91DC21C75EF9E00D461D2 /* DemoPhotoMessageViewModel.swift in Sources */,
 				C3F91DBE1C75EF9E00D461D2 /* DemoChatMessageFactory.swift in Sources */,
