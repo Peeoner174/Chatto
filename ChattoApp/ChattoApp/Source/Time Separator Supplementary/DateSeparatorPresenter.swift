@@ -24,7 +24,7 @@
 
 import Chatto
 
-class DateSeparatorPresenter<SupplementaryT: TimeSeparatorModel>: SupplementaryItemPresenterProtocol {
+class DateSeparatorPresenter<SupplementaryT: TimeSeparatorModel>: SupplementaryChatItemPresenterProtocol {
     public final weak var dateSeparatorModel: SupplementaryT?
 
     init(dateSeparatorModel: SupplementaryT) {
@@ -52,17 +52,18 @@ class DateSeparatorPresenter<SupplementaryT: TimeSeparatorModel>: SupplementaryI
     }
 }
 
-class DateSeparatorPresenterBuilder: SupplementaryItemPresenterBuilderProtocol {
+class DateSeparatorPresenterBuilder: SupplementaryChatItemPresenterBuilderProtocol {
+    
     func canHandleChatItem(_ chatItem: ChatItemProtocol) -> Bool {
         return chatItem is DateSeparatorModel
     }
     
-    func createPresenterWithChatItem(_ chatItem: ChatItemProtocol) -> SupplementaryItemPresenterProtocol {
+    func createPresenterWithChatItem(_ chatItem: ChatItemProtocol) -> SupplementaryChatItemPresenterProtocol {
         assert(self.canHandleChatItem(chatItem))
         return DateSeparatorPresenter(dateSeparatorModel: chatItem as! TimeSeparatorModel)
     }
     
-    var presenterType: SupplementaryItemPresenterProtocol.Type {
+    var presenterType: SupplementaryChatItemPresenterProtocol.Type {
         return DateSeparatorPresenter.self
     }
 }

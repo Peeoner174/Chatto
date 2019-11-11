@@ -24,7 +24,7 @@
 
 import Chatto
 
-class DateSeparatorModel: SupplementaryItemProtocol {
+class DateSeparatorModel: SupplementaryChatItemProtocol {
     var supplementary: ChatItemProtocol
     var messages: [ChatItemProtocol]
     var uid: String
@@ -33,5 +33,11 @@ class DateSeparatorModel: SupplementaryItemProtocol {
         self.uid = uid
         self.supplementary = supplementary
         self.messages = messages
+    }
+}
+
+extension DateSeparatorModel {
+    static var chatItemType: ChatItemType {
+        return "DateSeparatorModel"
     }
 }

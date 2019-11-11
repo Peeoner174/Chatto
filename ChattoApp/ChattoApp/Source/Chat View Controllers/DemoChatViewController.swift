@@ -99,13 +99,18 @@ class DemoChatViewController: BaseChatViewController {
             compoundCellDimensions: .defaultDimensions,
             baseCellStyle: BaseMessageCollectionViewCellAvatarStyle()
         )
-
         return [
             DemoTextMessageModel.chatItemType: [textMessagePresenter],
             DemoPhotoMessageModel.chatItemType: [photoMessagePresenter],
             SendingStatusModel.chatItemType: [SendingStatusPresenterBuilder()],
             TimeSeparatorModel.chatItemType: [TimeSeparatorPresenterBuilder()],
             ChatItemType.compoundItemType: [compoundPresenterBuilder]
+        ]
+    }
+    
+    override func createSupplementaryPresenterBuilders() -> [ChatItemType : [SupplementaryChatItemPresenterBuilderProtocol]] {
+        return [
+            DateSeparatorModel.chatItemType : [DateSeparatorPresenterBuilder()]
         ]
     }
 

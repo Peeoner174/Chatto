@@ -375,6 +375,7 @@ open class BaseChatViewController: UIViewController, UICollectionViewDataSource,
     public private(set) var inputBarContainer: UIView!
     public private(set) var inputContentContainer: UIView!
     public internal(set) var presenterFactory: ChatItemPresenterFactoryProtocol!
+    public internal(set) var supplementaryPresenterFactory: SupplementaryItemPresenterFactoryProtocol!
     let presentersByCell = NSMapTable<UICollectionViewCell, AnyObject>(keyOptions: .weakMemory, valueOptions: .weakMemory)
     var visibleCells: [IndexPath: UICollectionViewCell] = [:] // @see visibleCellsAreValid(changes:)
 
@@ -402,12 +403,22 @@ open class BaseChatViewController: UIViewController, UICollectionViewDataSource,
         // Default implementation
         return ChatItemPresenterFactory(presenterBuildersByType: self.createPresenterBuilders())
     }
+    
+    open func createSupplementaryPresenterFactory() -> SupplementaryItemPresenterFactoryProtocol {
+        // Default implementation
+        return SupplementaryItemPresenterFactory(presenterBuildersByType: self.createSupplementaryPresenterBuilders())
+    }
 
     open func createPresenterBuilders() -> [ChatItemType: [ChatItemPresenterBuilderProtocol]] {
         assert(false, "Override in subclass")
         return [ChatItemType: [ChatItemPresenterBuilderProtocol]]()
     }
-
+    
+    open func createSupplementaryPresenterBuilders() -> [ChatItemType: [SupplementaryChatItemPresenterBuilderProtocol]] {
+        assert(false, "Override in subclass")
+        return [ChatItemType: [SupplementaryChatItemPresenterBuilderProtocol]]()
+    }
+    
     open func createChatInputView() -> UIView {
         assert(false, "Override in subclass")
         return UIView()

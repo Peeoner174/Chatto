@@ -21,7 +21,7 @@
 		55A77B4A1FCC5EE70040C77E /* MessagesSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A77B491FCC5EE70040C77E /* MessagesSelectorProtocol.swift */; };
 		55A77B4C1FCC5FFB0040C77E /* BaseMessagesSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A77B4B1FCC5FFB0040C77E /* BaseMessagesSelector.swift */; };
 		55EE230821BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE230721BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift */; };
-		5C7D2C482375A0960014D40E /* TimeSeparatorReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D2C472375A0960014D40E /* TimeSeparatorReusableView.swift */; };
+		5C7D2C482375A0960014D40E /* DateSeparatorSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D2C472375A0960014D40E /* DateSeparatorSupplementaryView.swift */; };
 		5C7D2C4A2375A2D10014D40E /* DateSeparatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D2C492375A2D10014D40E /* DateSeparatorModel.swift */; };
 		5C7D2C4C2375A3B40014D40E /* DateSeparatorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D2C4B2375A3B40014D40E /* DateSeparatorPresenter.swift */; };
 		C33FBFB01BDE441C008E3545 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C33FBFAF1BDE441C008E3545 /* Assets.xcassets */; };
@@ -93,7 +93,7 @@
 		55A77B491FCC5EE70040C77E /* MessagesSelectorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesSelectorProtocol.swift; sourceTree = "<group>"; };
 		55A77B4B1FCC5FFB0040C77E /* BaseMessagesSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMessagesSelector.swift; sourceTree = "<group>"; };
 		55EE230721BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToBottomButtonChatViewController.swift; sourceTree = "<group>"; };
-		5C7D2C472375A0960014D40E /* TimeSeparatorReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSeparatorReusableView.swift; sourceTree = "<group>"; };
+		5C7D2C472375A0960014D40E /* DateSeparatorSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSeparatorSupplementaryView.swift; sourceTree = "<group>"; };
 		5C7D2C492375A2D10014D40E /* DateSeparatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSeparatorModel.swift; sourceTree = "<group>"; };
 		5C7D2C4B2375A3B40014D40E /* DateSeparatorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSeparatorPresenter.swift; sourceTree = "<group>"; };
 		623390018DA74FF277EE2626 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,7 +224,7 @@
 		5C7D2C462375A0690014D40E /* Time Separator Supplementary */ = {
 			isa = PBXGroup;
 			children = (
-				5C7D2C472375A0960014D40E /* TimeSeparatorReusableView.swift */,
+				5C7D2C472375A0960014D40E /* DateSeparatorSupplementaryView.swift */,
 				5C7D2C492375A2D10014D40E /* DateSeparatorModel.swift */,
 				5C7D2C4B2375A3B40014D40E /* DateSeparatorPresenter.swift */,
 			);
@@ -536,7 +536,7 @@
 				C3F91DB71C75EF9E00D461D2 /* DemoChatItemsDecorator.swift in Sources */,
 				EAE6345722EB0CAD0053E21A /* TestItemsReloadingViewController.swift in Sources */,
 				0997CD2F2042E42100D7BDF9 /* CellsViewController.swift in Sources */,
-				5C7D2C482375A0960014D40E /* TimeSeparatorReusableView.swift in Sources */,
+				5C7D2C482375A0960014D40E /* DateSeparatorSupplementaryView.swift in Sources */,
 				0997CD312042E58400D7BDF9 /* ChatWithTabBarExamplesViewController.swift in Sources */,
 				558730341FCD8891005BC2EC /* AddRandomMessageChatViewController.swift in Sources */,
 				DECD501A21AEEAF100988729 /* ContentAwareInputItem.swift in Sources */,

@@ -120,6 +120,11 @@ extension BaseChatViewController: ChatCollectionViewLayoutDelegate {
         assert(self.presenterFactory != nil, "Presenter factory is not initialized")
         return self.presenterFactory.createChatItemPresenter(chatItem)
     }
+    
+    public func createPresenterForSupplementaryChatItem(_ supplementaryChatItem: SupplementaryChatItemProtocol) -> SupplementaryChatItemPresenterProtocol {
+        assert(self.presenterFactory != nil, "Supplementary factory is not init")
+        return self.supplementaryPresenterFactory.createSupplementaryItemPresenter(supplementaryChatItem)
+    }
 
     public func confugureCollectionViewWithPresenters() {
         assert(self.presenterFactory == nil, "Presenter factory is already initialized")
@@ -128,6 +133,7 @@ extension BaseChatViewController: ChatCollectionViewLayoutDelegate {
             return
         }
         self.presenterFactory = self.createPresenterFactory()
+        self.supplementaryPresenterFactory = self.createSupplementaryPresenterFactory()
         self.presenterFactory.configure(withCollectionView: collectionView )
     }
 

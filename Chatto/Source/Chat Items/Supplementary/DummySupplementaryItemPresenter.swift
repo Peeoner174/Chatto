@@ -22,28 +22,25 @@
 // THE SOFTWARE.
 
 
-import UIKit
+import Foundation
 
-class BaseSupplementaryItemPresentor<SupplementaryViewT: UICollectionReusableView>: SupplementaryChatItemPresenterProtocol {
-    public final weak var supplementaryView: SupplementaryViewT?
-    
-    public init() { }
-    
+class DummySupplementaryItemPresenter: SupplementaryChatItemPresenterProtocol {
     static func registerSupplementaryItem(_ collectionView: UICollectionView) {
-        assert(false, "Implement in subclass")
+        assertionFailure()
     }
     
     func heightForSupplementaryItem(maximumWidth width: CGFloat, decorationAttributes: ChatItemDecorationAttributesProtocol?) -> CGFloat {
-        assert(false, "Implement in subclass")
+        assertionFailure()
         return 0.0
     }
     
     func dequeueSupplementaryItem(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView {
-        assert(false, "Implemenent in subclass")
-        return UICollectionViewCell()
+        assertionFailure()
+        return UICollectionReusableView()
     }
     
-    func configureSupplementaryItem(_ cell: UICollectionReusableView, decorationAttributes: ChatItemDecorationAttributesProtocol?) {
-        assert(false, "Implemenent in subclass")
+    func configureSupplementaryItem(_ reusableView: UICollectionReusableView, decorationAttributes: ChatItemDecorationAttributesProtocol?) {
+        assertionFailure()
     }
+    
 }

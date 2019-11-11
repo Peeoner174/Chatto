@@ -25,14 +25,14 @@ import UIKit
 
 // Supplementary is variety of chat item
 
-public protocol SupplementaryItemProtocol: AnyObject, UniqueIdentificable {
+public protocol SupplementaryChatItemProtocol: AnyObject, UniqueIdentificable {
     /// Supplementary element
     var supplementary: ChatItemProtocol { get }
     /// Related messages elements
     var messages: [ChatItemProtocol] { get set}
 }
 
-public protocol SupplementaryItemPresenterProtocol: class {
+public protocol SupplementaryChatItemPresenterProtocol: class {
     static func registerSupplementaryItem(_ collectionView: UICollectionView)
     
     var canCalculateHeightInBackground: Bool { get } // Default is false
@@ -44,16 +44,16 @@ public protocol SupplementaryItemPresenterProtocol: class {
 }
 
 
-public extension SupplementaryItemPresenterProtocol {
+public extension SupplementaryChatItemPresenterProtocol {
     var canCalculateHeightInBackground: Bool { return false }
     func supplementaryItemWillBeShown(_ reusableView: UICollectionReusableView) {}
     func supplementaryItemWasHidden(_ reusableView: UICollectionReusableView) {}
 }
 
-public protocol SupplementaryItemPresenterBuilderProtocol {
+public protocol SupplementaryChatItemPresenterBuilderProtocol {
     func canHandleChatItem(_ chatItem: ChatItemProtocol) -> Bool
-    func createPresenterWithChatItem(_ chatItem: ChatItemProtocol) -> SupplementaryItemPresenterProtocol
-    var presenterType: SupplementaryItemPresenterProtocol.Type { get }
+    func createPresenterWithChatItem(_ chatItem: ChatItemProtocol) -> SupplementaryChatItemPresenterProtocol
+    var presenterType: SupplementaryChatItemPresenterProtocol.Type { get }
 }
 
 
