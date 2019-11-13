@@ -29,6 +29,25 @@ extension BaseChatViewController: ChatCollectionViewLayoutDelegate {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.chatItemCompanionCollection.count
     }
+    
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
+    @objc(collectionView:viewForSupplementaryElementOfKind:atIndexPath:) public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if ( kind == UICollectionView.elementKindSectionHeader )
+        {
+//            let presenter = self.presenterForIndexSection(indexPath)
+//
+//
+//            let cell = presenter.dequeueCell(collectionView: collectionView, indexPath: indexPath)
+//            let decorationAttributes = self.decorationAttributesForIndexSection(indexPath)
+//            presenter.configureCell(cell, decorationAttributes: decorationAttributes)
+//            return cell
+        }
+        
+        return UICollectionReusableView()
+    }
 
     @objc(collectionView:cellForItemAtIndexPath:)
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -133,8 +152,9 @@ extension BaseChatViewController: ChatCollectionViewLayoutDelegate {
             return
         }
         self.presenterFactory = self.createPresenterFactory()
-        self.supplementaryPresenterFactory = self.createSupplementaryPresenterFactory()
         self.presenterFactory.configure(withCollectionView: collectionView )
+        self.supplementaryPresenterFactory = self.createSupplementaryPresenterFactory()
+        self.supplementaryPresenterFactory.configure(withCollectionView: collectionView)
     }
 
     public func decorationAttributesForIndexPath(_ indexPath: IndexPath) -> ChatItemDecorationAttributesProtocol? {

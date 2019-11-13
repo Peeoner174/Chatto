@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3565429D203DB99300B29DA1 /* ChatLayoutConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565429C203DB99300B29DA1 /* ChatLayoutConfiguration.swift */; };
 		5C7D2C44237595EC0014D40E /* BaseSupplementaryItemPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D2C43237595EC0014D40E /* BaseSupplementaryItemPresentor.swift */; };
+		5CD7897D237C3F1C00C3C4EA /* SupplementaryItemPresenterFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD7897C237C3F1C00C3C4EA /* SupplementaryItemPresenterFactoryProtocol.swift */; };
 		6E5BF8FE23756A8C00E43614 /* SupplementaryItemProtocolDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5BF8FD23756A8C00E43614 /* SupplementaryItemProtocolDefinitions.swift */; };
 		B3B1B0FF1D6B40DF00D1183D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1B0FE1D6B40DF00D1183D /* Utils.swift */; };
 		C31E919A1BFF4CA300339585 /* BaseChatViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31E91991BFF4CA300339585 /* BaseChatViewControllerTests.swift */; };
@@ -54,6 +55,7 @@
 		3565429C203DB99300B29DA1 /* ChatLayoutConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLayoutConfiguration.swift; sourceTree = "<group>"; };
 		55E85D821BE390BE001885AD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C7D2C43237595EC0014D40E /* BaseSupplementaryItemPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSupplementaryItemPresentor.swift; sourceTree = "<group>"; };
+		5CD7897C237C3F1C00C3C4EA /* SupplementaryItemPresenterFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementaryItemPresenterFactoryProtocol.swift; sourceTree = "<group>"; };
 		6E5BF8FD23756A8C00E43614 /* SupplementaryItemProtocolDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementaryItemProtocolDefinitions.swift; sourceTree = "<group>"; };
 		B3B1B0FE1D6B40DF00D1183D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C31E91991BFF4CA300339585 /* BaseChatViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChatViewControllerTests.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				C3C7C3941CAC4BAC00A49929 /* ChatDataSourceProtocol.swift */,
 				C3C7C3951CAC4BAC00A49929 /* CollectionChanges.swift */,
 				C3C7C3961CAC4BAC00A49929 /* KeyboardTracker.swift */,
+				5CD7897C237C3F1C00C3C4EA /* SupplementaryItemPresenterFactoryProtocol.swift */,
 			);
 			path = Collaborators;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				C36281ED1BF10086004D6BCE /* SerialTaskQueue.swift in Sources */,
 				5C7D2C44237595EC0014D40E /* BaseSupplementaryItemPresentor.swift in Sources */,
 				C321DDAE1BE9649F00DE88CC /* ChatItemProtocolDefinitions.swift in Sources */,
+				5CD7897D237C3F1C00C3C4EA /* SupplementaryItemPresenterFactoryProtocol.swift in Sources */,
 				C36281E51BF0F0F0004D6BCE /* BaseChatViewController+Changes.swift in Sources */,
 				C38352D11CC6514B006C359C /* BaseChatViewController+AccessoryViewRevealer.swift in Sources */,
 				C342D0BD1C638681008A4605 /* ChatItemCompanion.swift in Sources */,
