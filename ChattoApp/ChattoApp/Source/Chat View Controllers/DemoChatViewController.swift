@@ -49,6 +49,16 @@ class DemoChatViewController: BaseChatViewController {
         self.title = "Chat"
         self.messagesSelector.delegate = self
         self.chatItemsDecorator = DemoChatItemsDecorator(messagesSelector: self.messagesSelector)
+        if let layout = collectionView?.collectionViewLayout as? ChatCollectionViewLayout {
+             layout.stickyIndexPaths.append(IndexPath(item: 12, section: 0))
+//            for (idx, element) in dataSource.chatItems.enumerated()  {
+//                layout.stickyIndexPaths.append(IndexPath(item: 10, section: 0))
+//                if element.type == TimeSeparatorModel.chatItemType {
+//
+//
+//                }
+//            }
+        }
     }
 
     var chatInputPresenter: AnyObject!

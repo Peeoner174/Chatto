@@ -31,14 +31,16 @@ public protocol ChatCollectionViewLayoutDelegate: class {
 public struct ChatCollectionViewLayoutModel {
     let contentSize: CGSize
     let layoutAttributes: [UICollectionViewLayoutAttributes]
-    let layoutAttributesBySectionAndItem: [[UICollectionViewLayoutAttributes]]
+    var layoutAttributesBySectionAndItem: [[UICollectionViewLayoutAttributes]]
+    let initialLayoutAttributesBySectionAndItem: [[UICollectionViewLayoutAttributes]]
     let calculatedForWidth: CGFloat
 
     public static func createModel(_ collectionViewWidth: CGFloat, itemsLayoutData: [(height: CGFloat, bottomMargin: CGFloat)]) -> ChatCollectionViewLayoutModel {
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         var layoutAttributesBySectionAndItem = [[UICollectionViewLayoutAttributes]]()
         layoutAttributesBySectionAndItem.append([UICollectionViewLayoutAttributes]())
-
+        var initialLayoutAttributesBySectionAndItem = [[UICollectionViewLayoutAttributes]]()
+        
         var verticalOffset: CGFloat = 0
         for (index, layoutData) in itemsLayoutData.enumerated() {
             let indexPath = IndexPath(item: index, section: 0)
@@ -52,11 +54,17 @@ public struct ChatCollectionViewLayoutModel {
             verticalOffset += itemSize.height
             verticalOffset += bottomMargin
         }
+        
+        for layoutAttributes in layoutAttributesBySectionAndItem {
+            let cloneLayoutAttributes = layoutAttributes.clone()
+            initialLayoutAttributesBySectionAndItem.append(cloneLayoutAttributes)
+        }
 
         return ChatCollectionViewLayoutModel(
             contentSize: CGSize(width: collectionViewWidth, height: verticalOffset),
             layoutAttributes: layoutAttributes,
             layoutAttributesBySectionAndItem: layoutAttributesBySectionAndItem,
+            initialLayoutAttributesBySectionAndItem: initialLayoutAttributesBySectionAndItem,
             calculatedForWidth: collectionViewWidth
         )
     }
@@ -66,14 +74,17 @@ public struct ChatCollectionViewLayoutModel {
             contentSize: .zero,
             layoutAttributes: [],
             layoutAttributesBySectionAndItem: [],
+            initialLayoutAttributesBySectionAndItem: [],
             calculatedForWidth: 0
         )
     }
 }
 
-open class ChatCollectionViewLayout: UICollectionViewLayout {
+open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
     var layoutModel: ChatCollectionViewLayoutModel!
     public weak var delegate: ChatCollectionViewLayoutDelegate?
+    
+    open var stickyIndexPaths = [IndexPath(row: 0, section: 0)]
 
     // Optimization: after reloadData we'll get invalidateLayout, but prepareLayout will be delayed until next run loop.
     // Client may need to force prepareLayout after reloadData, but we don't want to compute layout again in the next run loop.
@@ -103,23 +114,117 @@ open class ChatCollectionViewLayout: UICollectionViewLayout {
         }
     }
 
+    open override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
+        let oldBounds = collectionView!.bounds
+        let sizeChanged = oldBounds.width != newBounds.width || oldBounds.height != newBounds.height
+        
+        let context = super.invalidationContext(forBoundsChange: newBounds)
+        
+        if !sizeChanged {
+            context.invalidateItems(at: stickyIndexPaths)
+        }
+        return context
+    }
+    
     open override var collectionViewContentSize: CGSize {
         return self.layoutModel?.contentSize ?? .zero
     }
 
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return self.layoutModel.layoutAttributes.filter { $0.frame.intersects(rect) }
+        var newLayoutAttributes = [UICollectionViewLayoutAttributes]()
+
+        let layoutAttributesForElementsInRect = self.layoutModel.layoutAttributes.filter { $0.frame.intersects(rect) }
+        for layoutAttributesItem in layoutAttributesForElementsInRect {
+            guard !stickyIndexPaths.contains(layoutAttributesItem.indexPath), layoutAttributesItem.representedElementKind == nil else {
+                continue
+            }
+            newLayoutAttributes.append(layoutAttributesItem)
+        }
+        for indexPath in stickyIndexPaths {
+            if let attr = layoutAttributesForItem(at: indexPath) {
+                newLayoutAttributes.append(attr)
+            }
+        }
+        
+        return newLayoutAttributes
     }
 
     open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        if indexPath.section < self.layoutModel.layoutAttributesBySectionAndItem.count && indexPath.item < self.layoutModel.layoutAttributesBySectionAndItem[indexPath.section].count {
-            return self.layoutModel.layoutAttributesBySectionAndItem[indexPath.section][indexPath.item]
+        guard let initialLayoutAttributes = layoutModel.initialLayoutAttributesBySectionAndItem[guarded: indexPath.section]?[guarded: indexPath.item] else {
+            return super.layoutAttributesForItem(at: indexPath)
         }
-        assert(false, "Unexpected indexPath requested:\(indexPath)")
-        return nil
+        guard
+            let collectionView = collectionView,
+            let layoutAttributes = layoutModel.layoutAttributesBySectionAndItem[guarded: indexPath.section]?[guarded: indexPath.item],
+            stickyIndexPaths.contains(indexPath)
+            else {
+                return initialLayoutAttributes
+        }
+        
+        let headerCellStickyPositionYOffset = collectionView.contentOffset.y + layoutAttributes.frame.height + (collectionView.parentViewController?.navigationController?.navigationBar.frame.height ?? 0.0)
+        
+        guard headerCellStickyPositionYOffset > initialLayoutAttributes.frame.origin.y else {
+            return initialLayoutAttributes
+        }
+        
+        layoutAttributes.zIndex = 1000
+        layoutAttributes.frame.origin.y = headerCellStickyPositionYOffset
+        return makePopingHeaderCellIfNeeded(on: indexPath, with: layoutAttributes, initialLayoutAttributes: initialLayoutAttributes)
+    }
+    
+    func makePopingHeaderCellIfNeeded(on indexPath: IndexPath, with layoutAttributes: UICollectionViewLayoutAttributes, initialLayoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        guard
+            let nextStickyCellIndexPath = stickyIndexPaths[guarded: stickyIndexPaths.firstIndex(of: indexPath)! + 1],
+            let nextHeaderCellLayoutAttributes = layoutModel.initialLayoutAttributesBySectionAndItem[guarded: nextStickyCellIndexPath.section]?[guarded: nextStickyCellIndexPath.item]
+            else {
+                return layoutAttributes
+        }
+        
+        let cellsSpacing = nextHeaderCellLayoutAttributes.frame.origin.y - layoutAttributes.frame.origin.y
+    
+        guard cellsSpacing <= layoutAttributes.frame.height else { return layoutAttributes }
+        if cellsSpacing < -60.0 {
+            return initialLayoutAttributes
+        } else {
+            layoutAttributes.frame.origin.y = layoutAttributes.frame.origin.y - layoutAttributes.frame.height + cellsSpacing
+            return layoutAttributes
+        }
     }
 
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return self.layoutModel.calculatedForWidth != newBounds.width
+        return true
     }
 }
+
+extension Array {
+    subscript(guarded idx: Int) -> Element? {
+        guard (startIndex..<endIndex).contains(idx) else {
+            return nil
+        }
+        return self[idx]
+    }
+}
+
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+}
+
+extension Array where Element: NSCopying {
+    func clone() -> Array {
+        var copiedArray = Array<Element>()
+        for element in self {
+            copiedArray.append(element.copy() as! Element)
+        }
+        return copiedArray
+    }
+}
+

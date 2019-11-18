@@ -59,7 +59,17 @@ final class TestItemsReloadingViewController: DemoChatViewController {
             DemoChatMessageFactory.makeTextMessage("5", text: randomGoodAnswer, isIncoming: true),
             DemoChatMessageFactory.makePhotoMessage("6", image: randomImage, size: randomImage.size, isIncoming: false),
             DemoChatMessageFactory.makeTextMessage("7", text: "Cool, bye!", isIncoming: true),
-            DemoChatMessageFactory.makeCompoundMessage(uid: "8", text: randomGoodAnswer, imageName: randomImageName, isIncoming: false)
+            DemoChatMessageFactory.makeCompoundMessage(uid: "8", text: randomGoodAnswer, imageName: randomImageName, isIncoming: false),
+            DemoChatMessageFactory.makeDateCell(text: "asd"),
+            DemoChatMessageFactory.makeTextMessage("1", text: "Hello", isIncoming: true),
+            DemoChatMessageFactory.makeTextMessage("2", text: "Hi!", isIncoming: false),
+            DemoChatMessageFactory.makeTextMessage("3", text: "How are you doing?", isIncoming: true),
+            DemoChatMessageFactory.makeTextMessage("4", text: "I'm fine, thanks!", isIncoming: false),
+            DemoChatMessageFactory.makeTextMessage("5", text: randomGoodAnswer, isIncoming: true),
+            DemoChatMessageFactory.makePhotoMessage("6", image: randomImage, size: randomImage.size, isIncoming: false),
+            DemoChatMessageFactory.makeTextMessage("7", text: "Cool, bye!", isIncoming: true),
+            DemoChatMessageFactory.makeCompoundMessage(uid: "8", text: randomGoodAnswer, imageName: randomImageName, isIncoming: false),
+            DemoChatMessageFactory.makeDateCell(text: "asd")
         ].reversed()
     }
 }

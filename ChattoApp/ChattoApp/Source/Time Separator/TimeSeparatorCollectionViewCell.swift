@@ -45,6 +45,7 @@ class TimeSeparatorCollectionViewCell: UICollectionViewCell {
         self.label.textAlignment = .center
         self.label.textColor = UIColor.gray
         self.contentView.addSubview(label)
+        self.contentView.backgroundColor = .purple
     }
 
     var text: String = "" {

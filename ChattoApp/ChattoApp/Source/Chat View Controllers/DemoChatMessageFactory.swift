@@ -54,6 +54,11 @@ class DemoChatMessageFactory {
         let photoMessageModel = DemoPhotoMessageModel(messageModel: messageModel, imageSize: size, image: image)
         return photoMessageModel
     }
+    
+    class func makeDateCell(text: String) -> TimeSeparatorModel {
+        let timeSeparatorModel = TimeSeparatorModel(uid: "", date: text)
+        return timeSeparatorModel
+    }
 
     static func makeCompoundMessage(uid: String = UUID().uuidString, text: String? = nil, imageName: String? = nil, isIncoming: Bool) -> DemoCompoundMessageModel {
         let messageModel = self.makeMessageModel(uid,
