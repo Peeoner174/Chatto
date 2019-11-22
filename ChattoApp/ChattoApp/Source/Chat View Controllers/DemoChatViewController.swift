@@ -42,6 +42,13 @@ class DemoChatViewController: BaseChatViewController {
     lazy private var baseMessageHandler: BaseMessageHandler = {
         return BaseMessageHandler(messageSender: self.messageSender, messagesSelector: self.messagesSelector)
     }()
+    
+    lazy private var baseSeparatorHandler: BaseSeparatorHandler = {
+        return BaseSeparatorHandler(didTapSeparatorCompletion: { [weak self] (id) in
+            guard let self = self else { return }
+            self.scrollToItem(withId: id, position: .top, animated: true)
+        })
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,12 +116,16 @@ class DemoChatViewController: BaseChatViewController {
             compoundCellDimensions: .defaultDimensions,
             baseCellStyle: BaseMessageCollectionViewCellAvatarStyle()
         )
-
+        
+        let timeSeparatorPresenterBuilder = TimeSeparatorPresenterBuilder(
+            interactionHandler: baseSeparatorHandler
+        )
+        
         return [
             DemoTextMessageModel.chatItemType: [textMessagePresenter],
             DemoPhotoMessageModel.chatItemType: [photoMessagePresenter],
             SendingStatusModel.chatItemType: [SendingStatusPresenterBuilder()],
-            TimeSeparatorModel.chatItemType: [TimeSeparatorPresenterBuilder()],
+            TimeSeparatorModel.chatItemType: [timeSeparatorPresenterBuilder],
             ChatItemType.compoundItemType: [compoundPresenterBuilder]
         ]
     }

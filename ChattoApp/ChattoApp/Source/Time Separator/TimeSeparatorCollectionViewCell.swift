@@ -46,6 +46,7 @@ class TimeSeparatorCollectionViewCell: UICollectionViewCell {
         self.label.textColor = UIColor.gray
         self.contentView.addSubview(label)
         self.contentView.backgroundColor = .purple
+        self.contentView.addGestureRecognizer(tapGesture)
     }
 
     var text: String = "" {
@@ -66,4 +67,18 @@ class TimeSeparatorCollectionViewCell: UICollectionViewCell {
         self.label.bounds.size = self.label.sizeThatFits(self.contentView.bounds.size)
         self.label.center = self.contentView.center
     }
+    
+    // MARK: - Event Handlers
+    
+    public var onTapped: ((_ cell: UICollectionViewCell) -> Void)?
+    
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapCell(_:)))
+        return tapGestureRecognizer
+    }()
+    
+    @objc private func didTapCell(_ tapGestureRecognizer: UITapGestureRecognizer) {
+        onTapped?(self)
+    }
+
 }

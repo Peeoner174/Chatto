@@ -27,6 +27,11 @@ import UIKit
 import Chatto
 
 public class TimeSeparatorPresenterBuilder: ChatItemPresenterBuilderProtocol {
+    private let interactionHandler: BaseSeparatorHandler?
+    
+    init(interactionHandler: BaseSeparatorHandler? = nil) {
+        self.interactionHandler = interactionHandler
+    }
 
     public func canHandleChatItem(_ chatItem: ChatItemProtocol) -> Bool {
         return chatItem is TimeSeparatorModel
@@ -34,7 +39,10 @@ public class TimeSeparatorPresenterBuilder: ChatItemPresenterBuilderProtocol {
 
     public func createPresenterWithChatItem(_ chatItem: ChatItemProtocol) -> ChatItemPresenterProtocol {
         assert(self.canHandleChatItem(chatItem))
-        return TimeSeparatorPresenter(timeSeparatorModel: chatItem as! TimeSeparatorModel)
+        return TimeSeparatorPresenter(
+            timeSeparatorModel: chatItem as! TimeSeparatorModel,
+            interactionHandler: interactionHandler
+        )
     }
 
     public var presenterType: ChatItemPresenterProtocol.Type {
@@ -43,10 +51,12 @@ public class TimeSeparatorPresenterBuilder: ChatItemPresenterBuilderProtocol {
 }
 
 class TimeSeparatorPresenter: ChatItemPresenterProtocol {
+    private let interactionHandler: BaseSeparatorHandler?
 
     let timeSeparatorModel: TimeSeparatorModel
-    init (timeSeparatorModel: TimeSeparatorModel) {
+    init (timeSeparatorModel: TimeSeparatorModel, interactionHandler: BaseSeparatorHandler? = nil) {
         self.timeSeparatorModel = timeSeparatorModel
+        self.interactionHandler = interactionHandler
     }
 
     private static let cellReuseIdentifier = TimeSeparatorCollectionViewCell.self.description()
@@ -68,8 +78,11 @@ class TimeSeparatorPresenter: ChatItemPresenterProtocol {
             assert(false, "expecting status cell")
             return
         }
-
         timeSeparatorCell.text = self.timeSeparatorModel.date
+        timeSeparatorCell.onTapped = { [weak self] (cell) in
+            guard let uid = self?.timeSeparatorModel.uid else { return }
+            self?.interactionHandler?.userDidTapOnSeparator(withId: uid)
+        }
     }
 
     var canCalculateHeightInBackground: Bool {
