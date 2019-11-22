@@ -94,6 +94,23 @@ open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
         self.layoutNeedsUpdate = true
     }
 
+    
+    public func updateStickyIndexPathsSet(_ dataSource: ChatDataSourceProtocol) {
+        stickyIndexPaths = []
+        for (indx, chatItem) in dataSource.chatItems.enumerated() {
+            guard chatItem is Stickable else { continue }
+            stickyIndexPaths.append(IndexPath(item: indx, section: 0))
+        }
+    }
+    
+    public func cellInStickedState(by indexPath: IndexPath) -> Bool {
+        guard
+            let initialLayoutAttributes = layoutModel.initialLayoutAttributesBySectionAndItem[guarded: indexPath.section]?[guarded: indexPath.item],
+            let layoutAttributes = layoutModel.layoutAttributesBySectionAndItem[guarded: indexPath.section]?[guarded: indexPath.item]
+            else { return false }
+        
+        return initialLayoutAttributes.frame.origin.y < layoutAttributes.frame.origin.y// - 50
+    }
     open override func prepare() {
         super.prepare()
         guard self.layoutNeedsUpdate else { return }

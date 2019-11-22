@@ -41,6 +41,8 @@ class TimeSeparatorModel: ChatItemProtocol {
     }
 }
 
+extension TimeSeparatorModel: Stickable {}
+
 extension Date {
     // Have a time stamp formatter to avoid keep creating new ones. This improves performance
     private static let weekdayAndDateStampDateFormatter: DateFormatter = {

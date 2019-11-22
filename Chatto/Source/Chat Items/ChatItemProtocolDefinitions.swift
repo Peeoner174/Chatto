@@ -26,9 +26,21 @@ import UIKit
 
 public typealias ChatItemType = String
 
+public protocol Stickable { }
+public protocol ChatItemCanHaveAvatarProtocol {
+    var avatarViewFrame: CGRect { get }
+    var bubbleViewFrame: CGRect { get }
+}
+
 public protocol ChatItemProtocol: AnyObject, UniqueIdentificable {
     var type: ChatItemType { get }
 }
+
+//extension ChatItemProtocol {
+//    var isSticky: Bool {
+//        return false
+//    }
+//}
 
 public protocol ChatItemDecorationAttributesProtocol {
     var bottomMargin: CGFloat { get }
