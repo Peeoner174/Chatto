@@ -21,6 +21,7 @@
 		55A77B4A1FCC5EE70040C77E /* MessagesSelectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A77B491FCC5EE70040C77E /* MessagesSelectorProtocol.swift */; };
 		55A77B4C1FCC5FFB0040C77E /* BaseMessagesSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A77B4B1FCC5FFB0040C77E /* BaseMessagesSelector.swift */; };
 		55EE230821BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE230721BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift */; };
+		6E6E54F823839330007416F5 /* BaseSeparatorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6E54F723839330007416F5 /* BaseSeparatorHandler.swift */; };
 		C33FBFB01BDE441C008E3545 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C33FBFAF1BDE441C008E3545 /* Assets.xcassets */; };
 		C33FBFB31BDE441C008E3545 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33FBFB11BDE441C008E3545 /* LaunchScreen.storyboard */; };
 		C341D42E1C9635DF00FD3463 /* TimeSeparatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C341D42B1C9635DF00FD3463 /* TimeSeparatorModel.swift */; };
@@ -92,6 +93,7 @@
 		55EE230721BFFD6600D50A1C /* ScrollToBottomButtonChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToBottomButtonChatViewController.swift; sourceTree = "<group>"; };
 		623390018DA74FF277EE2626 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DABD92E2BA40464C1727DA2 /* Pods-ChattoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChattoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChattoApp/Pods-ChattoApp.release.xcconfig"; sourceTree = "<group>"; };
+		6E6E54F723839330007416F5 /* BaseSeparatorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSeparatorHandler.swift; sourceTree = "<group>"; };
 		C33FBFA51BDE441C008E3545 /* ChattoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChattoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33FBFAF1BDE441C008E3545 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C33FBFB21BDE441C008E3545 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		55A77B471FCC41CC0040C77E /* Chat Items */ = {
 			isa = PBXGroup;
 			children = (
+				6E6E54F6238392F7007416F5 /* Base Separator */,
 				268CD56B21FA3C3900DEE2C2 /* Compound Messages */,
 				DECD501821AEEABF00988729 /* Content Aware Input  */,
 				55A77B481FCC42250040C77E /* Base Message */,
@@ -203,6 +206,14 @@
 				EAE6345622EB0CAD0053E21A /* TestItemsReloadingViewController.swift */,
 			);
 			path = "Chat View Controllers";
+			sourceTree = "<group>";
+		};
+		6E6E54F6238392F7007416F5 /* Base Separator */ = {
+			isa = PBXGroup;
+			children = (
+				6E6E54F723839330007416F5 /* BaseSeparatorHandler.swift */,
+			);
+			path = "Base Separator";
 			sourceTree = "<group>";
 		};
 		B616EDF620454A787C7E7D84 /* Pods */ = {
@@ -498,6 +509,7 @@
 				C341D42E1C9635DF00FD3463 /* TimeSeparatorModel.swift in Sources */,
 				C3F91DBC1C75EF9E00D461D2 /* DemoChatViewController.swift in Sources */,
 				C3F91DBD1C75EF9E00D461D2 /* DemoChatDataSource.swift in Sources */,
+				6E6E54F823839330007416F5 /* BaseSeparatorHandler.swift in Sources */,
 				C3F91DB61C75EF9E00D461D2 /* AppDelegate.swift in Sources */,
 				268CD57A22034A9900DEE2C2 /* DemoImageMessageContentFactory.swift in Sources */,
 				268CD56D21FA3C4C00DEE2C2 /* DemoCompoundMessageModel.swift in Sources */,

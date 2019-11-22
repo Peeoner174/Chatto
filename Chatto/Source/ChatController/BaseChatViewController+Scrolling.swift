@@ -156,6 +156,19 @@ extension BaseChatViewController {
 
     open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         self.scrollViewEventsHandler?.onScrollViewDidEndDragging(scrollView, decelerate)
+        if decelerate {
+            return
+        } else {
+            scrollingFinished(scrollView: scrollView)
+        }
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        scrollingFinished(scrollView: scrollView)
+    }
+    
+    @objc open func scrollingFinished(scrollView: UIScrollView) {
+        
     }
 
     open func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
@@ -164,11 +177,24 @@ extension BaseChatViewController {
 
     public func autoLoadMoreContentIfNeeded() {
         guard self.autoLoadingEnabled, let dataSource = self.chatDataSource else { return }
-
         if self.isCloseToTop() && dataSource.hasMorePrevious {
             dataSource.loadPrevious()
+            if !hasCellInStickyState && dataSource.hasMorePrevious {
+                dataSource.loadPrevious()
+                if dataSource.hasMorePrevious, !hasCellInStickyState { dataSource.loadPrevious() }
+            }
         } else if self.isCloseToBottom() && dataSource.hasMoreNext {
             dataSource.loadNext()
         }
+        (collectionView?.collectionViewLayout as? ChatCollectionViewLayout)?.updateStickyIndexPathsSet(dataSource)
+    }
+    
+    private var hasCellInStickyState: Bool {
+        guard let chatCollectionViewLayout = collectionView!.collectionViewLayout as? ChatCollectionViewLayout else {
+            fatalError("not implemented for current uses collectionViewLayout type")
+        }
+        return collectionView!.indexPathsForVisibleItems.contains(where: { indexPath in
+          chatCollectionViewLayout.cellInStickedState(by: indexPath)
+        })
     }
 }

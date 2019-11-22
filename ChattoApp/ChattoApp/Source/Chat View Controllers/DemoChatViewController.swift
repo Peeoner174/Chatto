@@ -56,18 +56,8 @@ class DemoChatViewController: BaseChatViewController {
         self.title = "Chat"
         self.messagesSelector.delegate = self
         self.chatItemsDecorator = DemoChatItemsDecorator(messagesSelector: self.messagesSelector)
-        if let layout = collectionView?.collectionViewLayout as? ChatCollectionViewLayout {
-             layout.stickyIndexPaths.append(IndexPath(item: 12, section: 0))
-//            for (idx, element) in dataSource.chatItems.enumerated()  {
-//                layout.stickyIndexPaths.append(IndexPath(item: 10, section: 0))
-//                if element.type == TimeSeparatorModel.chatItemType {
-//
-//
-//                }
-//            }
-        }
     }
-
+    
     var chatInputPresenter: AnyObject!
     override func createChatInputView() -> UIView {
         let chatInputView = ChatInputBar.loadNib()
@@ -89,7 +79,7 @@ class DemoChatViewController: BaseChatViewController {
         chatInputView.maxCharactersCount = 1000
         return chatInputView
     }
-
+    
     override func createPresenterBuilders() -> [ChatItemType: [ChatItemPresenterBuilderProtocol]] {
 
         let textMessagePresenter = TextMessagePresenterBuilder(
@@ -163,6 +153,56 @@ class DemoChatViewController: BaseChatViewController {
         }
         return item
     }
+    
+    override func scrollingFinished(scrollView: UIScrollView) {
+        guard
+            let collectionView = collectionView,
+            let chatCollectionViewLayout = collectionView.collectionViewLayout as? ChatCollectionViewLayout
+            else { return }
+        
+        if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { indexPath in
+            return chatCollectionViewLayout.cellInStickedState(by: indexPath)
+                && collectionView.cellForItem(at: indexPath) is TimeSeparatorCollectionViewCell
+        }) { hideCell(on: indexPath) }
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard
+            let collectionView = collectionView,
+            let chatCollectionViewLayout = collectionView.collectionViewLayout as? ChatCollectionViewLayout
+            else { return }
+
+        let timeCellsIndexPaths = collectionView.indexPathsForVisibleItems.filter {
+            return collectionView.cellForItem(at: $0) is TimeSeparatorCollectionViewCell
+            }
+        timeCellsIndexPaths.forEach { showCell(on: $0) }
+    }
+    
+    private func hideCell(on indexPath: IndexPath) {
+        guard
+            let cell = collectionView?.cellForItem(at: indexPath)
+            else { return }
+        let contentOffset = collectionView?.contentOffset // For checking on autoscroll event
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) { [weak self] in
+            guard
+                let collectionView = self?.collectionView,
+                contentOffset == collectionView.contentOffset
+            else { return }
+            UIView.animate(withDuration: 0.3, animations: {
+                cell.contentView.alpha = 0.0
+            })
+        }
+    }
+    
+    private func showCell(on indexPath: IndexPath) {
+        guard
+            let cell = collectionView?.cellForItem(at: indexPath)
+            else { return }
+        UIView.animate(withDuration: 0.3, animations: {
+            cell.contentView.alpha = 1.0
+        })
+    }
+    
 }
 
 extension DemoChatViewController: MessagesSelectorDelegate {
