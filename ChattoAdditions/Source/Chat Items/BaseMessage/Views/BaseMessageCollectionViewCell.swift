@@ -247,14 +247,14 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
 
     private func updateAvatarView(from viewModel: MessageViewModelProtocol,
                                   with style: BaseMessageCollectionViewCellStyleProtocol) {
-        self.avatarView.isHidden = !viewModel.decorationAttributes.isShowingAvatar
 
+        self.avatarView.isHidden = !viewModel.decorationAttributes.isShowingAvatar
         let avatarImageSize = style.avatarSize(viewModel: viewModel)
         if avatarImageSize != .zero {
             self.avatarView.image = viewModel.avatarImage.value
         }
     }
-
+    
     // MARK: layout
     open override func layoutSubviews() {
         super.layoutSubviews()
@@ -264,7 +264,6 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
         self.bubbleView.bma_rect = layout.bubbleViewFrame
         self.bubbleView.preferredMaxLayoutWidth = layout.preferredMaxWidthForBubble
         self.bubbleView.layoutIfNeeded()
-
         self.avatarView.bma_rect = layout.avatarViewFrame
         self.selectionIndicator.bma_rect = layout.selectionIndicatorFrame
 
@@ -421,6 +420,16 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
         default:
             break
         }
+    }
+}
+
+extension BaseMessageCollectionViewCell: ChatItemCanHaveAvatarProtocol {
+    public var avatarViewFrame: CGRect {
+        return self.avatarView.frame
+    }
+    
+    public var bubbleViewFrame: CGRect {
+        return self.bubbleView.frame
     }
 }
 

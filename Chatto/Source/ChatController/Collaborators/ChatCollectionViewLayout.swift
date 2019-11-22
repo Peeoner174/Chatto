@@ -85,6 +85,7 @@ open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
     public weak var delegate: ChatCollectionViewLayoutDelegate?
     
     open var stickyIndexPaths = [IndexPath(row: 0, section: 0)]
+    private var insertingIndexPaths = [IndexPath]()
 
     // Optimization: after reloadData we'll get invalidateLayout, but prepareLayout will be delayed until next run loop.
     // Client may need to force prepareLayout after reloadData, but we don't want to compute layout again in the next run loop.
@@ -93,7 +94,6 @@ open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
         super.invalidateLayout()
         self.layoutNeedsUpdate = true
     }
-
     
     public func updateStickyIndexPathsSet(_ dataSource: ChatDataSourceProtocol) {
         stickyIndexPaths = []
@@ -111,6 +111,25 @@ open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
         
         return initialLayoutAttributes.frame.origin.y < layoutAttributes.frame.origin.y// - 50
     }
+    
+    open override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
+        super.prepare(forCollectionViewUpdates: updateItems)
+        
+        insertingIndexPaths.removeAll()
+        
+        for update in updateItems {
+            if let indexPath = update.indexPathAfterUpdate, update.updateAction == .insert {
+                insertingIndexPaths.append(indexPath)
+            }
+        }
+    }
+    
+    open override func finalizeCollectionViewUpdates() {
+        super.finalizeCollectionViewUpdates()
+        
+        insertingIndexPaths.removeAll()
+    }
+    
     open override func prepare() {
         super.prepare()
         guard self.layoutNeedsUpdate else { return }
@@ -141,6 +160,18 @@ open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
             context.invalidateItems(at: stickyIndexPaths)
         }
         return context
+    }
+    
+    override open func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
+        
+        if insertingIndexPaths.contains(itemIndexPath) {
+            attributes?.alpha = 1.0
+            attributes?.frame.origin.y -= attributes!.frame.height
+            
+//            attributes?.transform = CGAffineTransform(translationX: 0, y: -attributes!.frame.height)
+        }
+        return attributes
     }
     
     open override var collectionViewContentSize: CGSize {
@@ -174,9 +205,7 @@ open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
             let collectionView = collectionView,
             let layoutAttributes = layoutModel.layoutAttributesBySectionAndItem[guarded: indexPath.section]?[guarded: indexPath.item],
             stickyIndexPaths.contains(indexPath)
-            else {
-                return initialLayoutAttributes
-        }
+            else { return initialLayoutAttributes }
         
         let headerCellStickyPositionYOffset = collectionView.contentOffset.y + layoutAttributes.frame.height + (collectionView.parentViewController?.navigationController?.navigationBar.frame.height ?? 0.0)
         
