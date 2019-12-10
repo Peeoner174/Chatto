@@ -124,6 +124,11 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
     }
 
     public private(set) var bubbleView: BubbleViewType!
+//    {
+//        didSet {
+//            self.bubbleView.transform = CGAffineTransform(translationX: 0, y: 1000)
+//        }
+//    }
     open func createBubbleView() -> BubbleViewType! {
         assert(false, "Override in subclass")
         return nil
@@ -164,6 +169,35 @@ open class BaseMessageCollectionViewCell<BubbleViewType>: UICollectionViewCell, 
         return tapGestureRecognizer
     }()
 
+    func makeBubbleViewInsertAnimation() {
+        guard let collectionView = self.superview as? UICollectionView else {
+            return
+        }
+        if collectionView.visibleCells.last == self as UICollectionViewCell {
+           
+            bubbleView.alpha = 0.0
+            bubbleView.isHidden = false
+            bubbleView.transform = CGAffineTransform(translationX: 0, y: 1000)
+            UIView.transition(with: bubbleView, duration: 0.8, options: .curveEaseIn, animations: { [weak self] in
+                self?.bubbleView.alpha = 1.0
+                self?.bubbleView.transform = CGAffineTransform.identity
+            }) { (_) in
+                
+            }
+//            UIView.animate(withDuration: 0.8) { [weak self] in
+//                self?.bubbleView.alpha = 1.0
+////                self?.bubbleView.transform = CGAffineTransform(translationX: 0, y: 1000)
+//
+//                self?.bubbleView.transform = CGAffineTransform.identity
+//            }
+        }
+    }
+    
+    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
+        makeBubbleViewInsertAnimation()
+    }
+    
     private func commonInit() {
         self.avatarView = self.createAvatarView()
         self.avatarView.addGestureRecognizer(self.avatarTapGestureRecognizer)

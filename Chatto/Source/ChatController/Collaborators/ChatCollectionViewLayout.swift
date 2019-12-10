@@ -149,7 +149,7 @@ open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
             }
         }
     }
-
+    
     open override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
         let oldBounds = collectionView!.bounds
         let sizeChanged = oldBounds.width != newBounds.width || oldBounds.height != newBounds.height
@@ -169,7 +169,6 @@ open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
             attributes?.alpha = 1.0
             attributes?.frame.origin.y -= attributes!.frame.height
             
-//            attributes?.transform = CGAffineTransform(translationX: 0, y: -attributes!.frame.height)
         }
         return attributes
     }
