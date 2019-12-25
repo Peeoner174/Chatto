@@ -231,7 +231,7 @@ open class ChatCollectionViewLayout: UICollectionViewFlowLayout {
         if cellsSpacing < -60.0 {
             return initialLayoutAttributes
         } else {
-            layoutAttributes.frame.origin.y = layoutAttributes.frame.origin.y - layoutAttributes.frame.height + cellsSpacing
+            layoutAttributes.frame.origin.y -= layoutAttributes.frame.height + cellsSpacing
             return layoutAttributes
         }
     }
